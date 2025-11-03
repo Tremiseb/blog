@@ -1,0 +1,25 @@
+Activer Wamp
+Taper dans un navigateur 
+http://localhost/phpmyadmin 
+
+Se connecter avec les logs par défaut :
+login : 'root'
+password : ''
+
+Dans phpMyAdmin
+Créer la table teamjardin
+Enfin executer le script sql contenu dans le fichier 'script_bd.txt'
+
+!!!!!!ATTENTION!!!!!!!!
+Dans le fichier config.ini
+Adapter la variable BASE_URL en fonction de votre arborescence fichier
+
+Exemple :
+Voici le chemin dans l'explorateur de fichier windows :
+C:\wamp64\www\Projet-S3S4\config.ini
+Donc on écrit dans config.ini à la ligne 2 :
+define('BASE_URL', '/Projet-S3S4'); 
+
+(Armin)
+C:\wamp64\www\PHP\Projet-S3S4\config.ini
+define('BASE_URL', '/PHP/Projet-S3S4'); 

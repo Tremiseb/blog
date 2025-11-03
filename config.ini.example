@@ -1,0 +1,8 @@
+[database]
+host = localhost
+name = mydatabase
+user = root
+pass = password
+
+[app]
+base_url = /url

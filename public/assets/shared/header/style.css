@@ -1,0 +1,50 @@
+header {
+  background-color: #fff;
+}
+
+#logo_header {
+  height: 100px;
+}
+
+/* Menu de navigation */
+nav ul {
+  list-style: none;              
+  display: flex;                 
+  gap: 100px;                     
+
+}
+
+nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  padding: 15px;
+}
+
+nav a:hover {
+  background-color: var(--bg);
+  border-radius: 15px;               
+}
+
+.btn_login {
+    display: inline-block;           
+    background-color: #367048;       
+    color: white;                    
+    padding: 10px 20px;             
+    border: none;                    
+    border-radius: 8px;              
+    cursor: pointer;                 
+    font-size: larger;               
+    text-decoration: none;           
+    text-align: center;              
+    transition: background-color 0.3s; 
+}
+
+.btn_login:hover {
+    background-color: #2d5938;       
+}
+
+
+
+
+
