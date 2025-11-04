@@ -9,11 +9,12 @@ function login(PDO $pdo, string $username, string $password): ?array {
     return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
 }
 
-function CreerUtilisateur(PDO $pdo, string $username, string $password, string $role): bool {
-    $stmt = $pdo->prepare("INSERT INTO users (username, password, role) VALUES (:username, :password, :role)");
+function CreerUtilisateur(PDO $pdo, string $email, string $password, string $username, string $role): bool {
+    $stmt = $pdo->prepare("INSERT INTO users (email, password, username, role) VALUES (:email, :password, :username, :role)");
     return $stmt->execute([
-        'username' => $username,
+        'email' => $email,
         'password' => md5($password),
+        'username' => $username,
         'role'     => $role
     ]);
 }

@@ -21,14 +21,16 @@ class RegisterController {
         $roles = getRoles($this->pdo);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username = $_POST['username'] ?? '';
+
+            $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
+            $username = $_POST['username'] ?? '';
             $role     = $_POST['role'] ?? '';
 
             if (!$username || !$password) {
                 $erreur = "Veuillez remplir tous les champs.";
             } else {
-                $userCreated = CreerUtilisateur($this->pdo, $username, $password, $role);
+                $userCreated = CreerUtilisateur($this->pdo, $email, $password, $username, $role);
                 if ($userCreated) {
                     header('Location: ' . BASE_URL . '/public/index.php?page=login');
                     exit;
