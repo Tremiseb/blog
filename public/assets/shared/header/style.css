@@ -22,13 +22,13 @@ nav a {
 }
 
 nav a:hover {
-  background-color: var(--bg);
+  background-color: var(--vert-fonce);
   border-radius: 15px;               
 }
 
 .btn_login {
     display: inline-block;           
-    background-color: #367048;       
+    background-color: var(--vert-fonce);       
     color: white;                    
     padding: 10px 20px;             
     border: none;                    
@@ -41,7 +41,7 @@ nav a:hover {
 }
 
 .btn_login:hover {
-    background-color: #2d5938;       
+    background-color: #fd8700;       
 }
 
 

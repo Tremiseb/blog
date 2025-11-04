@@ -1,5 +1,5 @@
 body.page-login{
-    background-color: var(--bg);
+    background-color: var(--vert-fonce);
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
@@ -35,7 +35,7 @@ form {
     margin: 10px;
     border-radius: 8px;
     border: none;
-    background-color: #367048;
+    background-color: rgb(252, 164, 0);
     color: white;
     font-weight: bold;
     font-size: 1rem;

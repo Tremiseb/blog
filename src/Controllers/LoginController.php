@@ -13,20 +13,16 @@ class LoginController {
     }
 
     public function handleRequest(): void {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
 
         $erreur = '';
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username = $_POST['username'] ?? '';
+            $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
 
-            $user = login($this->pdo, $username, $password);
+            $user = login($this->pdo, $email, $password);
 
             if ($user) {
-                $_SESSION['user'] = $user['username'];
+                $_SESSION['email'] = $user['email'];
                 $_SESSION['role'] = $user['role'];
 
                 if ($user['role'] === 'admin') {

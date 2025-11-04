@@ -1,9 +1,9 @@
 <?php
 
-function login(PDO $pdo, string $username, string $password): ?array {
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = :username AND password = :password");
+function login(PDO $pdo, string $email, string $password): ?array {
+    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email AND password = :password");
     $stmt->execute([
-        'username' => $username,
+        'email' => $email,
         'password' => md5($password)
     ]);
     return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;

@@ -1,7 +1,7 @@
 
 <header>
     <div class='header-container'>
-        <img id="logo_header" src="<?= BASE_URL ?>/public/assets/shared/img/logoTeamJardinTexte.png" alt="logo_Team_Jardin">
+        <img id="logo_header" src="<?= BASE_URL ?>/public/assets/img/logo.png" alt="oco-logo">
         
         <nav>
             <ul>
