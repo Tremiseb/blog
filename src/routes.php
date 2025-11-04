@@ -50,7 +50,8 @@ switch ($page) {
             exit;
         }
 
-        ShowAdminHomeController();
+        $adminController = new AdminController();
+        $adminController->handleRequest('accueil');
         break;
 
     case 'user/accueil':

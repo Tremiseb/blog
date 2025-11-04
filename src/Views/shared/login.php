@@ -5,7 +5,7 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Login - Team Jardin</title>
+    <title>Login - Orange Cat Only</title>
     <link href="<?= BASE_URL ?>/public/assets/shared/login/style.css" rel="stylesheet">
     <link href="<?= BASE_URL ?>/public/assets/shared/charte-graphique.css" rel="stylesheet">
 </head>
