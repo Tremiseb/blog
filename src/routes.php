@@ -9,6 +9,7 @@ require_once __DIR__ . '/Controllers/AdminController.php';
 
 
 require_once __DIR__ . '/Controllers/UserController.php';
+require_once __DIR__ . '/Controllers/ArticleController.php';
 
 
 $page = $_GET['page'] ?? 'home';
@@ -51,7 +52,7 @@ switch ($page) {
         }
 
         $adminController = new AdminController();
-        $adminController->handleRequest('accueil');
+        $adminController->handleRequest();
         break;
 
     case 'user/accueil':
@@ -63,8 +64,21 @@ switch ($page) {
         }
 
         $userController = new UserController();
-        $userController->handleRequest('accueil');
+        $userController->handleRequest();
         break;
+
+    case 'user/creation-article':
+
+        if (empty($_SESSION['email']) || $_SESSION['role'] !== 'user') {
+            http_response_code(403);
+            echo "Faut être connecté en user";
+            exit;
+        }
+
+        $ArticleController = new ArticleController();
+        $ArticleController->handleRequest();
+        break;
+
 
     default:
         http_response_code(404);

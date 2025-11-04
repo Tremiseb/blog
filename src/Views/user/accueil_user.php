@@ -25,6 +25,10 @@ $pageTitle = "Accueil";
 
 <?php
     $nav = $nav ?? ['Accueil', 'Avis', 'Nos réalisations', 'Contact']; 
+
+    $boutonCreerArticle = $boutonCreerArticle ?? "Créer un article";
+    $creerArticle = $creerArticle ?? BASE_URL . "/public/index.php?page=user/creation-article";
+
     $bouton = $bouton ?? "Déconnexion";
     $redirection = $redirection ?? BASE_URL . "/public/index.php?page=login";
 

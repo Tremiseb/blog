@@ -11,6 +11,8 @@
             </ul>
         </nav>    
     
+        <a href="<?= $creerArticle ?>" class="btn_login"><?php echo($boutonCreerArticle)  ?></a>
+
         <a href="<?= $redirection ?>" class="btn_login"><?php echo($bouton)  ?></a>
     </div>
 </header>

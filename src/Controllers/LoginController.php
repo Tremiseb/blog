@@ -16,6 +16,7 @@ class LoginController {
 
         $erreur = '';
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
             $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
 
@@ -24,6 +25,8 @@ class LoginController {
             if ($user) {
                 $_SESSION['email'] = $user['email'];
                 $_SESSION['role'] = $user['role'];
+                $_SESSION['user_id'] = $user['id'];
+
 
                 if ($user['role'] === 'admin') {
                     header('Location: ' . BASE_URL . '/public/index.php?page=admin/accueil');
