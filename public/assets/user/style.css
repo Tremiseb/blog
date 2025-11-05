@@ -1,0 +1,80 @@
+/*liste des articles*/
+
+.articles {
+    max-width: 900px;
+    margin: 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 0 15px;
+}
+
+.article {
+    background: #fdd39b;
+    border: 1px solid #ffa600;
+    border-radius: 10px;
+    padding: 20px 25px;
+    box-shadow: 0 2px 6px #ffa600;
+    transition: transform 0.15s ease-in-out, box-shadow 0.15s;
+}
+
+.article:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.article h2 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    color: #e64a01;
+}
+
+.article p {
+    line-height: 1.5;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.article small {
+    display: block;
+    margin-top: 8px;
+    color: #666;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+/*pages*/
+
+.pagination {
+    text-align: center;
+    margin: 35px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.pagination a {
+    padding: 8px 14px;
+    border: solid 1px #ffa600;
+    border-radius: 6px;
+    color: #ffa600;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background 0.2s, color 0.2s;
+}
+
+.pagination a:hover {
+    background: #ffa600;
+    color: white;
+}
+
+.pagination a.active {
+    background: #ffa600;
+    color: white;
+    pointer-events: none;
+}
+
+
+
+
