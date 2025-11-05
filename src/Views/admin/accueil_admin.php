@@ -35,7 +35,7 @@ $pageTitle = "Admin — Accueil";
     require_once __DIR__ . '/../shared/header.php';
 ?>
 
-<!-- Panneau admin : AJOUT / SUPPRESSION de catégories -->
+
 <section class="admin-panel">
     <h1>Gestion des catégories</h1>
 
@@ -66,7 +66,7 @@ $pageTitle = "Admin — Accueil";
 
 <hr>
 
-<!-- Liste d’articles : identique à la page user -->
+
 <div class="articles">
     <?php foreach ($articles as $article): ?>
         <div class="article">
