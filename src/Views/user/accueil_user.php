@@ -26,7 +26,6 @@ $pageTitle = "Accueil";
 <body>
 
 <?php
-    $nav = $nav ?? ['Accueil', 'Avis', 'Nos réalisations', 'Contact']; 
 
     $boutonCreerArticle = $boutonCreerArticle ?? "Créer un article";
     $creerArticle = $creerArticle ?? BASE_URL . "/public/index.php?page=user/creation-article";
@@ -37,15 +36,36 @@ $pageTitle = "Accueil";
     require_once __DIR__ . '/../shared/header.php';
 ?>
 
+
 <div class="articles">
     <?php foreach ($articles as $article): ?>
         <div class="article">
             <h2><?= htmlspecialchars($article['titre']) ?></h2>
             <p><?= nl2br(htmlspecialchars($article['description'])) ?></p>
-            <small>Par <?= htmlspecialchars($article['username']) ?> | Catégorie : <?= htmlspecialchars($article['categorie'] ?? 'Aucune') ?></small>
+            <small>
+                Par <?= htmlspecialchars($article['username']) ?> 
+                | Catégorie : <?= htmlspecialchars($article['categorie'] ?? 'Aucune') ?>
+            </small>
+
+            <?php if (isset($_SESSION['user_id']) && $article['user_id'] == $_SESSION['user_id']): ?>
+                <div class="article-actions">
+                    <form action="?page=article/supprimer" method="post" class="form-supprimer">
+                        <input type="hidden" name="article_id" value="<?= (int)$article['id'] ?>">
+                        <button type="submit" class="btn-supprimer">Supprimer</button>
+                    </form>
+                </div>
+            <?php endif; ?>
+
+            <div class="article-actions">
+                <a href="?page=user/commentaire_form&id=<?= (int)$article['id'] ?>" class="btn-commenter">
+                    Commenter
+                </a>
+            </div>
         </div>
     <?php endforeach; ?>
 </div>
+
+
 
 <div class="pagination">
     <?php if ($page > 1): ?>

@@ -48,4 +48,15 @@ function getCategories(PDO $pdo): array {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function supprimerArticle(PDO $pdo, int $articleId, int $userId): bool {
+    $stmt = $pdo->prepare("
+        DELETE FROM article 
+        WHERE id = :id AND user_id = :user_id
+    ");
+    return $stmt->execute([
+        'id' => $articleId,
+        'user_id' => $userId
+    ]);
+}
+
 
