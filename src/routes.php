@@ -78,7 +78,7 @@ switch ($page) {
         $ArticleController = new ArticleController();
         $ArticleController->handleRequest();
         break;
-
+    
 
     default:
         http_response_code(404);
