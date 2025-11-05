@@ -47,10 +47,21 @@ function cat_update(PDO $pdo, int $id, string $nom): bool {
  * ⚠️ Ton schéma a `article.categorie_id` avec ON DELETE SET NULL,
  * donc les articles concernés ne seront pas supprimés.
  */
-function cat_delete(PDO $pdo, int $id): bool {
-    $id = (int)$id;
+function cat_delete(PDO $pdo, int $id, bool $deleteArticles = true): bool {
     if ($id <= 0) return false;
 
-    $st = $pdo->prepare("DELETE FROM categorie WHERE id = ?");
-    return $st->execute([$id]);
+    $pdo->beginTransaction();
+    try {
+        if ($deleteArticles) {
+            $pdo->prepare("DELETE FROM article WHERE categorie_id = ?")->execute([$id]);
+        }
+        $pdo->prepare("DELETE FROM categorie WHERE id = ?")->execute([$id]);
+
+        $pdo->commit();
+        return true;
+    } catch (Throwable $e) {
+        $pdo->rollBack();
+        return false;
+    }
 }
+

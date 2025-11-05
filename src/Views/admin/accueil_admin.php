@@ -39,7 +39,8 @@ $pageTitle = "Admin — Accueil";
 <section class="admin-panel">
     <h1>Gestion des catégories</h1>
 
-    <form class="admin-add-cat" method="POST" action="">
+    <form class="admin-add-cat" method="POST"
+        action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>?page=admin/categories/create">
         <input type="text" name="nom" placeholder="Nouvelle catégorie" required>
         <button type="submit">Ajouter</button>
     </form>
@@ -49,8 +50,9 @@ $pageTitle = "Admin — Accueil";
             <?php foreach ($categories as $cat): ?>
                 <li>
                     <span><?= htmlspecialchars($cat['nom']) ?></span>
-                    <form method="POST" action=""
-                          onsubmit="return confirm('Supprimer la catégorie « <?= htmlspecialchars($cat['nom']) ?> » et ses articles ?');">
+                    <form method="POST"
+                        action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>?page=admin/categories/delete"
+                        onsubmit="return confirm('Supprimer la catégorie « <?= htmlspecialchars($cat['nom']) ?> » et ses articles ?');">
                         <input type="hidden" name="id" value="<?= (int)$cat['id'] ?>">
                         <button type="submit" class="danger">Supprimer</button>
                     </form>
