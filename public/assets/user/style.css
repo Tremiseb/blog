@@ -9,18 +9,22 @@
     padding: 0 15px;
 }
 
+
 .article {
     background: #fdd39b;
-    border: 1px solid #ffa600;
+    border: 1px solid #ddd;
     border-radius: 10px;
     padding: 20px 25px;
-    box-shadow: 0 2px 6px #ffa600;
-    transition: transform 0.15s ease-in-out, box-shadow 0.15s;
+    
+    transition: transform 0.15s ease-in-out, box-shadow 0.15s, background 0.2s;
 }
 
+
 .article:hover {
+    background: #fdd39b;
+    border: 1px solid #ffa600;
+    box-shadow: 0 2px 6px #ffa600;
     transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
 .article h2 {
