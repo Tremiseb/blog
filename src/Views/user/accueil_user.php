@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../../config.php'; 
 require_once __DIR__ . '/../../Database/db.php';
 require_once __DIR__ . '/../../Database/articleRepository.php';
+require_once __DIR__ . '/../../Database/commentaireRepository.php';
 
 $pageTitle = "Accueil";
 ?>
@@ -37,6 +38,8 @@ $pageTitle = "Accueil";
 ?>
 
 
+
+
 <div class="articles">
     <?php foreach ($articles as $article): ?>
         <div class="article">
@@ -62,6 +65,21 @@ $pageTitle = "Accueil";
                 </a>
             </div>
         </div>
+        <div class="commentaires">
+            <h3>Commentaires récents</h3>
+
+            <?php if (!empty($article['commentaires'])): ?>
+                <?php foreach ($article['commentaires'] as $commentaire): ?>
+                    <div class="commentaire">
+                        <p><?= nl2br(htmlspecialchars($commentaire['description'])) ?></p>
+                        <small>Par <?= htmlspecialchars($commentaire['username']) ?></small>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Aucun commentaire pour cet article.</p>
+            <?php endif; ?>
+        </div>
+
     <?php endforeach; ?>
 </div>
 

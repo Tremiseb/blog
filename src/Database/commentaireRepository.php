@@ -37,4 +37,25 @@ class CommentaireRepository {
             ':user_id' => $userId
         ]);
     }
+
+    
+    public function getCommentairesByArticleLimit(int $articleId, int $limit = null): array {
+        $sql = "SELECT c.*, u.username 
+                FROM commentaire c
+                JOIN users u ON c.user_id = u.id
+                WHERE c.article_id = :article_id
+                ORDER BY c.id ASC";
+
+        if ($limit) {
+            $limit = (int)$limit; 
+            $sql .= " LIMIT $limit";
+        }
+
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(':article_id', $articleId, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
 }

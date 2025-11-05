@@ -46,6 +46,13 @@ class UserController {
         $totalArticles = getArticlesCount($this->pdo);
         $totalPages = (int)ceil($totalArticles / $limit);
 
+        $commentaireRepo = new CommentaireRepository($this->pdo);
+
+        foreach ($articles as &$article) {
+        $article['commentaires'] = $commentaireRepo->getCommentairesByArticleLimit($article['id'], 2);
+    }
+
+
         require __DIR__ . '/../Views/user/accueil_user.php';
     }
 
