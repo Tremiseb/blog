@@ -78,7 +78,9 @@ switch ($page) {
         $ArticleController = new ArticleController();
         $ArticleController->handleRequest();
         break;
+    
 
+    //A RAJOUTER DANS LES AUTRES VERSIONS
     case 'admin/categories/create':
         if (empty($_SESSION['email']) || $_SESSION['role'] !== 'admin') { http_response_code(403); echo "Faut être connecté en admin"; exit; }
         (new AdminController())->handleRequest('categories/create');
@@ -88,7 +90,7 @@ switch ($page) {
         if (empty($_SESSION['email']) || $_SESSION['role'] !== 'admin') { http_response_code(403); echo "Faut être connecté en admin"; exit; }
         (new AdminController())->handleRequest('categories/delete');
         break;
-
+    //
 
     default:
         http_response_code(404);

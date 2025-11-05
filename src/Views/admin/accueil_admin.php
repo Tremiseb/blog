@@ -14,9 +14,9 @@ $pageTitle = "Admin — Accueil";
     <link href="<?= BASE_URL ?>/public/assets/shared/header/style.css" rel="stylesheet">
     <link href="<?= BASE_URL ?>/public/assets/shared/header/position.css" rel="stylesheet">
 
-    <!-- on réutilise le même CSS que user pour la liste d'articles -->
+    
     <link href="<?= BASE_URL ?>/public/assets/user/style.css" rel="stylesheet">
-    <!-- panneau simple pour l’admin (facultatif si tu l’as déjà) -->
+    
     <link href="<?= BASE_URL ?>/public/assets/admin/style.css" rel="stylesheet">
 
     <link href="<?= BASE_URL ?>/public/assets/shared/footer/style.css" rel="stylesheet">
@@ -42,7 +42,7 @@ $pageTitle = "Admin — Accueil";
     <form class="admin-add-cat" method="POST"
         action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>?page=admin/categories/create">
         <input type="text" name="nom" placeholder="Nouvelle catégorie" required>
-        <button type="submit">Ajouter</button>
+        <button type="submit" class="ajouter">Ajouter</button>
     </form>
 
     <?php if (!empty($categories)): ?>
@@ -54,7 +54,7 @@ $pageTitle = "Admin — Accueil";
                         action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>?page=admin/categories/delete"
                         onsubmit="return confirm('Supprimer la catégorie « <?= htmlspecialchars($cat['nom']) ?> » et ses articles ?');">
                         <input type="hidden" name="id" value="<?= (int)$cat['id'] ?>">
-                        <button type="submit" class="danger">Supprimer</button>
+                        <button type="submit" class="supprimer">Supprimer</button>
                     </form>
                 </li>
             <?php endforeach; ?>
@@ -64,7 +64,7 @@ $pageTitle = "Admin — Accueil";
     <?php endif; ?>
 </section>
 
-<hr>
+
 
 
 <div class="articles">
