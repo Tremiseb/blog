@@ -11,7 +11,7 @@
 
 
 .article {
-    background: #fdd39b;
+    background: #fdb530;
     border: 1px solid #ddd;
     border-radius: 10px;
     padding: 20px 25px;
@@ -21,9 +21,7 @@
 
 
 .article:hover {
-    background: #fdd39b;
-    border: 1px solid #ffa600;
-    box-shadow: 0 2px 6px #ffa600;
+    box-shadow: 0 2px 6px #ff7b00;
     transform: translateY(-3px);
 }
 
@@ -60,21 +58,21 @@
 
 .pagination a {
     padding: 8px 14px;
-    border: solid 1px #ffa600;
+    border: solid 1px #fdb530;
     border-radius: 6px;
-    color: #ffa600;
+    color: #fdb530;
     text-decoration: none;
     font-size: 0.95rem;
     transition: background 0.2s, color 0.2s;
 }
 
 .pagination a:hover {
-    background: #ffa600;
+    background: #fdb530;
     color: white;
 }
 
 .pagination a.active {
-    background: #ffa600;
+    background: #fdb530;
     color: white;
     pointer-events: none;
 }
