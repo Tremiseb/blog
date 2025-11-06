@@ -18,7 +18,10 @@ switch ($action) {
 
     case 'filter':
 
-        $categoryId = $_GET['category'] ?? null;
+        $categoryName = ($_GET['category'] ?? '');
+        if ($categoryName) {
+            $articles = getArticlesLimitByCatName($pdo, $categoryName, $limit, $offset);
+        }
 
         break;
 

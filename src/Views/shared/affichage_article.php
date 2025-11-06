@@ -1,15 +1,9 @@
 <?php
 
-// --------------------
-// Pagination
-// --------------------
 $limit = 5; 
 $page = isset($_GET['page_num']) ? max(1, (int)$_GET['page_num']) : 1;
 $offset = ($page - 1) * $limit;
 
-// --------------------
-// Récupération des articles + commentaires limités
-// --------------------
 $articles = getArticlesLimit($pdo, $limit, $offset);
 $totalArticles = getArticlesCount($pdo);
 $totalPages = (int)ceil($totalArticles / $limit);
