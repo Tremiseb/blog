@@ -14,7 +14,6 @@ $action  = $_GET['action'] ?? null;
 
 $redirectBack = BASE_URL . '/public/index.php?page=admin/accueil';
 
-// Sécurité
 if (!$user_id || $role !== 'admin') {
     http_response_code(403);
     exit("Accès réservé à l'admin.");

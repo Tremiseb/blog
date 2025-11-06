@@ -9,7 +9,6 @@ $user_id = $_SESSION['user_id'] ?? null;
 $action = $_GET['action'] ?? null;
 $error = null;
 
-// Récupération de l'article si on est sur la page d'ajout
 $article_id = (int)($_GET['id'] ?? 0);
 $article = null;
 if ($article_id > 0) {
@@ -19,7 +18,6 @@ if ($article_id > 0) {
     }
 }
 
-// Gestion des actions
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $user_id) {
 
     switch ($action) {
@@ -31,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $user_id) {
             if ($article_id_post && $description) {
                 $success = addCommentaire($pdo, $article_id_post, $user_id, $description);
                 if ($success) {
-                    // Redirection après ajout
+
                     $path = ($_SESSION['role'] === 'admin') ? "admin/accueil" : "user/accueil";
                     header('Location: ' . BASE_URL . '/public/index.php?page=' . $path);
                     exit;
