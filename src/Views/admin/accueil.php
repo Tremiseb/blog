@@ -47,7 +47,7 @@ $pageTitle = "Orange Cat Only";
             <h1>Gestion des catégories</h1>
 
             <form class="admin-add-cat" method="POST"
-                action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>?page=admin/create">
+                action="<?= BASE_URL ?>/public/index.php?page=admin/categorie&action=create">
                 <input type="text" name="nom" placeholder="Nouvelle catégorie" required>
                 <button type="submit" class="ajouter">Ajouter</button>
             </form>
@@ -58,9 +58,12 @@ $pageTitle = "Orange Cat Only";
                         <li>
                             <span><?= htmlspecialchars($cat['nom']) ?></span>
                             <form method="POST"
-                                action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>?page=admin/delete"
-                                onsubmit="return confirm('Supprimer la catégorie « <?= htmlspecialchars($cat['nom']) ?> » et ses articles ?');">
+                                action="<?= BASE_URL ?>/public/index.php?page=admin/categorie&action=delete"
+                                onsubmit="return confirm('Supprimer la catégorie « <?= htmlspecialchars($cat['nom']) ?> » ET tous les articles associés ? Cette action est définitive.');">
+
                                 <input type="hidden" name="id" value="<?= (int)$cat['id'] ?>">
+                                <input type="hidden" name="hard" value="1">   
+
                                 <button type="submit" class="supprimer">Supprimer</button>
                             </form>
                         </li>

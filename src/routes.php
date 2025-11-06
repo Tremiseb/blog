@@ -12,10 +12,12 @@ if (!in_array($page, $pagesPubliques) && empty($_SESSION['email'])) {
    exit;
 }
 
+
 switch ($page) {
     case 'home':
         require_once __DIR__ . '/Views/shared/login.php';
         break;
+
 
     case 'login':
         require_once __DIR__ . '/Views/shared/login.php';
@@ -25,6 +27,7 @@ switch ($page) {
         require_once __DIR__ . '/Controllers/LogoutController.php';
         break;
 
+
     case 'register':
         require_once __DIR__ . '/Views/shared/register.php';
         break;
@@ -32,7 +35,7 @@ switch ($page) {
     case 'user/accueil':
         require_once __DIR__ . '/Views/user/accueil.php';
         break;
-
+        
     case 'admin/accueil':
         require_once __DIR__ . '/Views/admin/accueil.php';
         break;
@@ -42,7 +45,7 @@ switch ($page) {
         break;
 
     case 'user/commentaire_form':
-        require_once __DIR__ . '/Views/shared/commentaire_form.php';
+        require_once __DIR__ . '/Views/user/commentaire_form.php';
         break;
 
     case 'user/commentaire':
@@ -51,6 +54,10 @@ switch ($page) {
 
     case 'user/article':
         require_once __DIR__ . '/Controllers/ArticleController.php';
+        break;
+    
+    case 'admin/categorie':
+        require_once __DIR__ . '/Controllers/CategorieController.php';
         break;
 
     default:

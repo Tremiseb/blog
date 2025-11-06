@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../../Controllers/HeaderController.php';
 
-$categories = cat_getAll($pdo); 
+$categories = getCategories($pdo); 
 ?>
 
 <header>
