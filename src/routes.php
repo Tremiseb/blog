@@ -26,6 +26,14 @@ switch ($page) {
         require_once __DIR__ . '/Views/user/accueil.php';
         break;
 
+    case 'user/accueil':
+        require_once __DIR__ . '/Views/user/accueil.php';
+        break;
+
+    case 'user/create':
+        require_once __DIR__ . '/Views/shared/create_article.php';
+        break;
+
 
     default:
         http_response_code(404);

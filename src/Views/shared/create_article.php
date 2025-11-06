@@ -2,6 +2,8 @@
 require_once __DIR__ . '/../../../src/config.php';
 require_once __DIR__ . '/../../../src/Database/db.php';
 require_once __DIR__ . '/../../../src/Database/articleRepository.php'; 
+require_once __DIR__ . '/../../../src/Controllers/ArticleController.php'; 
+
 
 $pdo = getPDO(DB_HOST, DB_NAME, DB_USER, DB_PASS);
 $categories = getCategories($pdo); 

@@ -8,12 +8,12 @@ $categories = cat_getAll($pdo);
     <div class='header-container'>
         <img id="logo_header" src="<?= BASE_URL ?>/public/assets/img/logo.png" alt="oco-logo">
 
-        <form action="/search" method="get">
+        <form action="?action=search" method="get">
             <input type="text" name="query" placeholder="Rechercher..." />
             <button type="submit">Rechercher</button>
         </form>
 
-        <form action="/search" method="get">
+        <form action="?action=filtrer" method="get">
             <select name="category">
                 <option value="" selected hidden>Toutes les catégories</option>
                 <?php foreach ($categories as $cat) : ?>
@@ -25,7 +25,7 @@ $categories = cat_getAll($pdo);
             <button type="submit">Filtrer</button>
         </form>
 
-        <a href="<?= $creerArticle ?>" class="btn_login"><?= $boutonCreerArticle ?></a>
+        <a href="<?= BASE_URL ?>/public/index.php?page=user/create" class="btn_login"><?= $boutonCreerArticle ?></a>
         <a href="<?= $redirection ?>" class="btn_login"><?= $bouton ?></a>
     </div>
 </header>
