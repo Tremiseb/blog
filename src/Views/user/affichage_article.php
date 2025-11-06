@@ -42,7 +42,7 @@ unset($article); // libère la référence
 
             <?php if (isset($_SESSION['user_id']) && $article['user_id'] == $_SESSION['user_id']): ?>
                 <div class="article-actions">
-                    <form action="?page=article/supprimer" method="post">
+                    <form action="?page=user/article&action=delete" method="post">
                         <input type="hidden" name="article_id" value="<?= (int)$article['id'] ?>">
                         <button type="submit">Supprimer</button>
                     </form>
@@ -62,6 +62,14 @@ unset($article); // libère la référence
                         <?= htmlspecialchars("@ " . $commentaire['username']) ?>
                         <p><?= nl2br(htmlspecialchars($commentaire['description'])) ?></p>
                     </div>
+                        <?php if (isset($_SESSION['user_id']) && $article['user_id'] == $_SESSION['user_id']): ?>
+
+                            <form action="?page=user/commentaire&action=delete" method="post">
+                                <input type="hidden" name="commentaire_id" value="<?= (int)$commentaire['id'] ?>">
+                                <button type="submit">Supprimer</button>
+                            </form>
+                        <?php endif; ?>
+
                 <?php endforeach; ?>
             <?php else: ?>
                 <p>Aucun commentaire pour cet article.</p>

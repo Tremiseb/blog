@@ -4,22 +4,37 @@ require_once __DIR__ . '/../Database/db.php';
 require_once __DIR__ . '/../Database/commentaireRepository.php';
 
 $pdo = getPDO(DB_HOST, DB_NAME, DB_USER, DB_PASS);
+$user_id = $_SESSION['user_id'] ?? null;
+$action = $_GET['action'] ?? null;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $article_id = $_POST['article_id'] ?? null;
-    $description = trim($_POST['description'] ?? '');
-    $user_id = $_SESSION['user_id'] ?? null;
+switch ($action) {
 
-    if ($article_id && $description && $user_id) {
+    case 'delete':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $user_id) {
+            $commentaire_id = $_POST['commentaire_id'] ?? null;
 
-        if (addCommentaire($pdo, $article_id, $user_id, $description)) {
-            header('Location: ?page=user/accueil');
-            exit;
-        } else {
-
-            echo "Impossible d'ajouter le commentaire.";
+            if ($commentaire_id) {
+                if (supprimerCommentaire($pdo, $commentaire_id, $user_id)) {
+                    header('Location: ' . BASE_URL . '/public/index.php?page=user/accueil');
+                } else {
+                    $erreur = "Impossible de supprimer le commentaire";
+                }
+            }
         }
-    } else {
-        echo "Tous les champs sont requis.";
-    }
+        break;
+
+    case 'add':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && $user_id) {
+            $article_id = $_POST['article_id'] ?? null;
+            $description = trim($_POST['description'] ?? '');
+
+            if ($article_id && $description) {
+                if (addCommentaire($pdo, $article_id, $user_id, $description)) {
+                    header('Location: ' . BASE_URL . '/public/index.php?page=user/accueil');
+                } else {
+                    $erreur = "Impossible d'ajouter le commentaire";
+                }
+            }
+        }
+        break;
 }

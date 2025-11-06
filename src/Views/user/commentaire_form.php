@@ -18,16 +18,14 @@ require_once __DIR__ . '/../../Controllers/CommentaireController.php';
     <h1>Ajouter un commentaire</h1>
 
     <?php if (!empty($error)): ?>
-        <div class="alert-error" style="color:red; margin-bottom:10px;">
+        <div class="alert-error">
             <?= htmlspecialchars($error) ?>
         </div>
     <?php endif; ?>
 
-    <form method="POST" action="">
+    <form method="POST" action="?page=user/commentaire&action=add">
         <input type="hidden" name="article_id" value="<?= (int)($_GET['id'] ?? 0) ?>">
-
         <textarea class="input" name="description" placeholder="Votre commentaire..." rows="5" required></textarea>
-
         <button class="btn_connexion" type="submit">Envoyer</button>
     </form>
 </div>

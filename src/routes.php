@@ -34,6 +34,15 @@ switch ($page) {
         require_once __DIR__ . '/Views/user/commentaire_form.php';
         break;
 
+    case 'user/commentaire':
+        require_once __DIR__ . '/Controllers/CommentaireController.php';
+        break;
+
+    case 'user/article':
+        require_once __DIR__ . '/Controllers/ArticleController.php';
+        break;
+
+
     default:
         http_response_code(404);
         echo "404 - Page non trouvée";
