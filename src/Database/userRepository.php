@@ -29,3 +29,11 @@ function getRoles(PDO $pdo): array {
     $stmt = $pdo->query("SELECT DISTINCT role FROM users"); 
     return $stmt->fetchAll(PDO::FETCH_COLUMN); 
 }
+
+function getUserIdByUsername(PDO $pdo, string $username): ?int {
+    $stmt = $pdo->prepare("SELECT id FROM users WHERE username = :username ");
+    $stmt->execute(['username' => $username]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $result ? (int)$result['id'] : null;
+}

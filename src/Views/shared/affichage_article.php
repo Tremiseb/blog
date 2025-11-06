@@ -4,7 +4,15 @@ $limit = 5;
 $page = isset($_GET['page_num']) ? max(1, (int)$_GET['page_num']) : 1;
 $offset = ($page - 1) * $limit;
 
-$articles = getArticlesLimit($pdo, $limit, $offset);
+if (isset($_POST['query']) && !empty($_POST['query'])) {
+
+    $id_user = getUserIdByUsername($pdo ,$_POST['query']);
+    $articles = getArticlesByUserLimit($pdo,$id_user , $limit, $offset);
+
+}else{
+    $articles = getArticlesLimit($pdo, $limit, $offset);
+}
+
 $totalArticles = getArticlesCount($pdo);
 $totalPages = (int)ceil($totalArticles / $limit);
 
