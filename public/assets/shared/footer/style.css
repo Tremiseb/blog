@@ -1,12 +1,10 @@
-footer.vitrine-footer {
-    background-color: var(--vert-fonce); 
-    justify-content: space-between;
-}
 
 
 
-footer.vitrine-footer p{
-    color:white;
+
+footer p{
+  background-color: orange;
+  color: white;
     font-weight: bold;
     text-align: center;
     padding: 30px;

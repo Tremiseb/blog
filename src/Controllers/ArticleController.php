@@ -7,6 +7,7 @@ $pdo = getPDO(DB_HOST, DB_NAME, DB_USER, DB_PASS);
 $user_id = $_SESSION['user_id'] ?? null;
 $action = $_GET['action'] ?? null;
 $error = '';
+$path;
 
 switch ($action) {
 
@@ -20,7 +21,14 @@ switch ($action) {
                 $error = "Veuillez remplir tous les champs.";
             } else {
                 if (createArticle($pdo, $titre, $description, $user_id, $categorie_id)) {
-                    header('Location: ' . BASE_URL . '/public/index.php?page=user/accueil');
+
+                    if ($_SESSION['role'] === 'admin') {
+                        $path = "admin/accueil";
+                    } else {
+                        $path = "user/accueil";
+                    }
+                    
+                    header('Location: ' . BASE_URL . '/public/index.php?page=' . $path);
                     exit;
                 } else {
                     $error = "Impossible de créer l'article.";
@@ -35,7 +43,14 @@ switch ($action) {
 
             if ($article_id) {
                 if (supprimerArticle($pdo, $article_id, $user_id)) {
-                    header('Location: ' . BASE_URL . '/public/index.php?page=user/accueil');
+
+                    if ($_SESSION['role'] === 'admin') {
+                        $path = "admin/accueil";
+                    } else {
+                        $path = "user/accueil";
+                    }
+
+                    header('Location: ' . BASE_URL . '/public/index.php?page=' . $path);
                     exit;
                 } else {
                     $error = "Impossible de supprimer l'article.";

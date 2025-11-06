@@ -44,6 +44,11 @@ switch ($page) {
         require_once __DIR__ . '/Views/shared/create_article.php';
         break;
 
+    case 'admin/create':
+        require_once __DIR__ . '/Views/shared/create_article.php';
+        break;
+
+
     case 'user/commentaire_form':
         require_once __DIR__ . '/Views/shared/commentaire_form.php';
         break;

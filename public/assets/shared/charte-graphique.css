@@ -2,3 +2,7 @@
     --vert-fonce: #fdb530;   
     --bg: #E5F6EA; 
 }
+
+body{
+    margin : 0px;
+}

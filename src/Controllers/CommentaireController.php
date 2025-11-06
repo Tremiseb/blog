@@ -15,7 +15,14 @@ switch ($action) {
 
             if ($commentaire_id) {
                 if (supprimerCommentaire($pdo, $commentaire_id, $user_id)) {
-                    header('Location: ' . BASE_URL . '/public/index.php?page=user/accueil');
+
+                    if ($_SESSION['role'] === 'admin') {
+                        $path = "admin/accueil";
+                    } else {
+                        $path = "user/accueil";
+                    }
+
+                    header('Location: ' . BASE_URL . '/public/index.php?page='. $path);
                 } else {
                     $erreur = "Impossible de supprimer le commentaire";
                 }
@@ -30,7 +37,14 @@ switch ($action) {
 
             if ($article_id && $description) {
                 if (addCommentaire($pdo, $article_id, $user_id, $description)) {
-                    header('Location: ' . BASE_URL . '/public/index.php?page=user/accueil');
+
+                    if ($_SESSION['role'] === 'admin') {
+                        $path = "admin/accueil";
+                    } else {
+                        $path = "user/accueil";
+                    }
+
+                    header('Location: ' . BASE_URL . '/public/index.php?page='. $path);
                 } else {
                     $erreur = "Impossible d'ajouter le commentaire";
                 }

@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../../Controllers/HeaderController.php';
+require_once __DIR__ . '/../../Controllers/QueryController.php';
 
+$path;
 $categories = getCategories($pdo); 
 ?>
 
@@ -10,7 +12,7 @@ $categories = getCategories($pdo);
 
         <form action="" method="POST">
             <input type="text" name="query" placeholder="Rechercher par le pseudo" />
-            <button type="submit">Rechercher</button>
+            <button type="submit"><?php echo($searchName)?> </button>
         </form>
 
         <form action="" method="POST">
@@ -22,10 +24,19 @@ $categories = getCategories($pdo);
                     </option>
                 <?php endforeach; ?>
             </select>
-            <button type="submit">Filtrer</button>
+            <button type="submit"> <?php echo($searchCategory)?></button>
         </form>
         
-        <a href="<?= BASE_URL ?>/public/index.php?page=user/create" class="btn_login"><?= $boutonCreerArticle ?></a>
+        <?php
+
+        if ($_SESSION['role'] === 'admin') {
+            $path = "admin/create";
+        } else {
+            $path = "user/create";
+        }
+        ?>
+
+        <a href="<?= BASE_URL ?>/public/index.php?page=<?= $path?>" class="btn_login"><?= $boutonCreerArticle ?></a>
         <a href="<?= $redirection ?>" class="btn_login"><?= $bouton ?></a>
     </div>
 </header>
