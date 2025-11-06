@@ -8,6 +8,12 @@ body.page-login{
     flex-direction: column;
 }
 
+
+h1{
+text-align: center;
+color: rgb(250, 100, 0);
+}
+
 .input {
     display: block;
     padding: 10px;
