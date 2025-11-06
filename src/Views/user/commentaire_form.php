@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/../../../src/config.php';
+require_once __DIR__ . '/../../Controllers/CommentaireController.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +23,7 @@ require_once __DIR__ . '/../../../src/config.php';
         </div>
     <?php endif; ?>
 
-    <form method="POST" action="?page=commentaire/store">
+    <form method="POST" action="">
         <input type="hidden" name="article_id" value="<?= (int)($_GET['id'] ?? 0) ?>">
 
         <textarea class="input" name="description" placeholder="Votre commentaire..." rows="5" required></textarea>

@@ -43,7 +43,6 @@ $pageTitle = "Orange Cat Only";
 
     require_once __DIR__ . '/affichage_article.php';
 
-
     require_once __DIR__ . '/../shared/footer.php';
 
 ?>
