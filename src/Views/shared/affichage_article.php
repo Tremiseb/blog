@@ -3,15 +3,6 @@ require_once __DIR__ . '/../../../src/config.php';
 require_once __DIR__ . '/../../Controllers/QueryController.php';
 
 ?>
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Accueil - Orange Cat Only</title>
-</head>
-<body>
-
 <div class="articles">
     <?php foreach ($articles as $article): ?>
         <div class="article">
@@ -76,5 +67,4 @@ require_once __DIR__ . '/../../Controllers/QueryController.php';
     <?php endif; ?>
 </div>
 
-</body>
-</html>
+        
