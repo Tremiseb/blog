@@ -29,8 +29,52 @@ CREATE TABLE commentaire (
   FOREIGN KEY (article_id) REFERENCES article(id) ON DELETE CASCADE,
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
--- Exemple d'utilisateurs
-INSERT INTO users (username, password, role) VALUES 
-('admin', MD5('password123'), 'admin'),
-('a', MD5('b'), 'admin'),
-('client1', MD5('clientpass'), 'client');
+
+
+INSERT INTO users (id, email, password, username, role) VALUES
+(1, 'garfield@cats.com', 'lasagna123', 'Garfield', 'user'),
+(2, 'simba@cats.com', 'jungleKing', 'Simba', 'user'),
+(3, 'oliver@cats.com', 'nycat2025', 'Oliver', 'user'),
+(4, 'tigrou@cats.com', 'bounceMe', 'Tigrou', 'admin'),
+(5, 'marmelade@cats.com', 'orange4life', 'Marmelade', 'user');
+
+INSERT INTO categorie (id, nom) VALUES
+(1, 'Humains'),
+(2, 'Nourriture'),
+(3, 'Bagarre'),
+(4, 'Sommeil'),
+(5, 'Exploration');
+
+INSERT INTO article (id, titre, description, user_id, categorie_id) VALUES
+(1, 'Pourquoi les humains ferment les portes ?', 'Sérieusement, pourquoi ils font ça ? J’étais sur le point de sortir explorer le monde.', 1, 1),
+(2, 'Les meilleures lasagnes maison', 'Un guide complet pour choisir la bonne viande et ignorer les légumes.', 1, 2),
+(3, 'Combat épique contre l’aspirateur', 'Aujourd’hui, j’ai affronté la bête bruyante. Spoiler : je suis vivant.', 2, 3),
+(4, 'Le meilleur endroit pour dormir au soleil', 'J’ai testé le canapé, le rebord de fenêtre et la pile de linge propre. Résultats ci-dessous.', 3, 4),
+(5, 'L’art de voler la nourriture humaine', 'Techniques d’approche, timing parfait et regard innocent inclus.', 5, 2),
+(6, 'Une nuit dehors : journal d’un chat aventurier', 'J’ai grimpé sur trois clôtures, découvert un raton laveur et regretté mon choix.', 2, 5),
+(7, 'Comment battre un autre chat sans se décoiffer', 'Conseils pour garder son charisme tout en montrant qui est le boss.', 4, 3),
+(8, 'Les humains et leurs écrans brillants', 'Ils fixent ces rectangles toute la journée. Peut-être qu’ils attendent qu’un oiseau en sorte ?', 3, 1),
+(9, 'Sieste ou repas : le dilemme du midi', 'Chaque jour, je me bats entre la faim et le sommeil. La lutte intérieure est réelle.', 1, 4),
+(10, 'Top 5 des plantes d’intérieur à mâchouiller', 'Certaines piquent, d’autres rendent malade. Voici mon guide basé sur expérience personnelle.', 5, 5);
+
+INSERT INTO commentaire (id, description, article_id, user_id) VALUES
+(1, 'Haha oui, les humains sont étranges. Ils ferment même les frigos !', 1, 2),
+(2, 'J’ai réussi à sortir une fois… j’ai eu peur du vent.', 1, 3),
+(3, 'Je valide totalement les lasagnes. Sans fromage, c’est un crime.', 2, 2),
+(4, 'L’aspirateur ? Ce monstre m’a déjà volé ma queue (en poils).', 3, 1),
+(5, 'Le rebord de fenêtre reste la valeur sûre. Lumière + silence = perfection.', 4, 3),
+(6, 'Vous dormez ? Moi je rebondis partout !', 4, 4),
+(7, 'Le regard innocent marche à tous les coups. Merci pour le tuto !', 5, 2),
+(8, 'Une fois, j’ai volé du saumon. Ils ont crié, mais ça valait le coup.', 5, 1),
+(9, 'J’ai essayé de sortir aussi, j’ai rencontré un hérisson. Mauvaise idée.', 6, 3),
+(10, 'Respect pour ton courage, frère félin.', 6, 4),
+(11, 'Toujours viser la queue de l’adversaire. Jamais la face.', 7, 2),
+(12, 'Je me bats seulement pour le dernier coussin.', 7, 5),
+(13, 'Les écrans… j’ai marché dessus et tout s’est figé. C’était magique.', 8, 1),
+(14, 'Peut-être qu’ils attendent une souris numérique ?', 8, 2),
+(15, 'Moi j’ai choisi : repas, puis sieste. Toujours dans cet ordre.', 9, 3),
+(16, 'Le dilemme est trop réel. Parfois je mange en dormant.', 9, 5),
+(17, 'J’ai mâchouillé une plante une fois. J’ai vomi, mais c’était fun.', 10, 4),
+(18, 'La menthe, c’est la meilleure !', 10, 1),
+(19, 'L’herbe à chat, évidemment. Rien ne bat ça.', 10, 2),
+(20, 'Je propose une catégorie spéciale : “Choses à renverser en pleine nuit”.', 1, 4);

@@ -1,7 +1,7 @@
 <?php
     require_once __DIR__ . '/../../../src/config.php'; 
 ?>
-
+<?php require_once __DIR__ . '/../../Controllers/RegisterController.php'; ?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -17,16 +17,17 @@
         <form method="POST" action="">
             <input class="input" type="text" name="email" placeholder="email@univ-lyon1.fr" required>
             <input class="input" type="text" name="username" placeholder="pseudo : Xx_Super_Orange_Cat_xX" required>
-
             <input class="input" type="password" name="password" placeholder="Mot de passe" required>
             <select class="dropdown" name="role" id="role">
+                <option value="user" selected>User</option>
                 <option value="admin">Admin</option>
-                <option value="user">User</option>
             </select>
 
+            <?php if (!empty($erreur)) : ?>
+                <p><?= htmlspecialchars($erreur) ?></p>
+            <?php endif; ?>
 
             <button class="btn_connexion" type="submit">Créer le compte</button>
-
         </form>
     </div>
 
