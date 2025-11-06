@@ -13,7 +13,7 @@ $categories = getCategories($pdo);
             <button type="submit">Rechercher</button>
         </form>
 
-        <form action="?page=user/accueil" method="get">
+        <form action="" method="POST">
             <select name="category">
                 <option value="" hidden>Toutes les catégories</option>
                 <?php foreach ($categories as $cat): ?>

@@ -3,13 +3,7 @@ require_once __DIR__ . '/../../config.php';
 require_once __DIR__ . '/../../Database/db.php';
 require_once __DIR__ . '/../../Database/articleRepository.php';
 require_once __DIR__ . '/../../Database/categorieRepository.php';
-
 require_once __DIR__ . '/../../Database/commentaireRepository.php';
-
-
-if (isset($_GET['category'])) {
-    $_SESSION['category_filter'] = $_GET['category'];
-}
 
 $category = $_GET['category'] ?? $_SESSION['category_filter'] ?? null;
 

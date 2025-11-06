@@ -4,16 +4,35 @@ $limit = 5;
 $page = isset($_GET['page_num']) ? max(1, (int)$_GET['page_num']) : 1;
 $offset = ($page - 1) * $limit;
 
-if (isset($_POST['query']) && !empty($_POST['query'])) {
+$articles = [];     
+$query = $_POST['query'] ?? '';
+$category = $_POST['category'] ?? '';
 
-    $id_user = getUserIdByUsername($pdo ,$_POST['query']);
-    $articles = getArticlesByUserLimit($pdo,$id_user , $limit, $offset);
+if (!empty($query)) {
 
-}else{
+    $id_user = getUserIdByUsername($pdo, $query);
+    if ($id_user !== null) {
+        $articles = getArticlesByUserLimit($pdo, $id_user, $limit, $offset);
+        $totalArticles = countArticlesByUser($pdo, $id_user);
+
+    } else {
+        $articles = []; 
+    }
+
+} elseif (!empty($category)) {
+
+    $categoryId = (int)$category;
+    $articles = getArticlesByCategorieLimit($pdo, $categoryId, $limit, $offset);
+    $totalArticles = countArticlesByCategorie($pdo, $categoryId);
+
+
+} else {
+
     $articles = getArticlesLimit($pdo, $limit, $offset);
+    $totalArticles = getArticlesCount($pdo);
+
 }
 
-$totalArticles = getArticlesCount($pdo);
 $totalPages = (int)ceil($totalArticles / $limit);
 
 foreach ($articles as &$article) {
