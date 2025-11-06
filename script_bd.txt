@@ -36,7 +36,8 @@ INSERT INTO users (id, email, password, username, role) VALUES
 (2, 'simba@cats.com', 'jungleKing', 'Simba', 'user'),
 (3, 'oliver@cats.com', 'nycat2025', 'Oliver', 'user'),
 (4, 'tigrou@cats.com', 'bounceMe', 'Tigrou', 'admin'),
-(5, 'marmelade@cats.com', 'orange4life', 'Marmelade', 'user');
+(5, 'marmelade@cats.com', 'orange4life', 'Marmelade', 'user'),
+
 
 INSERT INTO categorie (id, nom) VALUES
 (1, 'Humains'),
