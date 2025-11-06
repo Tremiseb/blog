@@ -1,6 +1,8 @@
 <?php 
 require_once __DIR__ . '/../../config.php'; 
 require_once __DIR__ . '/../../Database/db.php';
+require_once __DIR__ . '/../../Database/articleRepository.php';
+require_once __DIR__ . '/../../Database/commentaireRepository.php';
 
 $pageTitle = "Admin — Accueil";
 ?>
@@ -25,12 +27,12 @@ $pageTitle = "Admin — Accueil";
 <body>
 
 <?php
-    // mêmes variables que la page user (pour éviter les warnings dans header.php)
-    $nav = $nav ?? ['Accueil', 'Avis', 'Nos réalisations', 'Contact']; 
-    $boutonCreerArticle = $boutonCreerArticle ?? null; // pas obligatoire en admin
-    $creerArticle = $creerArticle ?? null;
+
+    $boutonCreerArticle = $boutonCreerArticle ?? "Créer un article";
+    $creerArticle = $creerArticle ?? BASE_URL . "/public/index.php?page=user/creation-article";
+
     $bouton = $bouton ?? "Déconnexion";
-    $redirection = $redirection ?? BASE_URL . "/public/index.php?page=logout";
+    $redirection = $redirection ?? BASE_URL . "/public/index.php?page=login";
 
     require_once __DIR__ . '/../shared/header.php';
 ?>

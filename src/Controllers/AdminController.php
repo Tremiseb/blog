@@ -1,15 +1,15 @@
 <?php
 
-require_once dirname(__DIR__) . '/config.php';
-require_once dirname(__DIR__) . '/Database/db.php';
+require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../Database/db.php';
+require_once __DIR__ . '/../Database/articleRepository.php';
 
-require_once dirname(__DIR__) . '/Database/articleRepository.php';     // liste/pagination articles
-require_once dirname(__DIR__) . '/Database/categorieRepository.php';   // CRUD catégories
+require_once __DIR__ . '/../Database/categorieRepository.php';   // CRUD catégories
 
 class AdminController
 {
     private PDO $pdo;
-    private int $limit = 5; // pagination comme l'user
+    private int $limit = 5; 
 
     public function __construct()
     {
@@ -18,7 +18,7 @@ class AdminController
 
     public function handleRequest(string $action = 'accueil'): void
     {
-        // Sécurité (ton routes.php filtre déjà normalement)
+         
         if (empty($_SESSION['email']) || ($_SESSION['role'] ?? '') !== 'admin') {
             http_response_code(403);
             echo "Accès admin requis.";
@@ -27,7 +27,7 @@ class AdminController
 
         switch ($action) {
             case 'accueil':
-            case 'categories': // alias : même écran
+            case 'categories': 
                 $this->showAccueil();
                 break;
 
@@ -48,7 +48,7 @@ class AdminController
 
     private function showAccueil(): void
     {
-        // pagination articles
+        
         $page   = isset($_GET['page_num']) ? max(1, (int)$_GET['page_num']) : 1;
         $limit  = $this->limit;
         $offset = ($page - 1) * $limit;
@@ -57,11 +57,78 @@ class AdminController
         $totalArticles = getArticlesCount($this->pdo);
         $totalPages    = (int)ceil($totalArticles / $limit);
 
-        // catégories pour panneau admin
+        $commentaireRepo = new CommentaireRepository($this->pdo);
+
+        foreach ($articles as &$article) {
+        $article['commentaires'] = $commentaireRepo->getCommentairesByArticleLimit($article['id'], 2);
+
+        
         $categories = cat_getAll($this->pdo);
 
-        require dirname(__DIR__) . '/Views/admin/accueil_admin.php';
+        require __DIR__ . '/../Views/admin/accueil_admin.php';
     }
+
+
+    private function deleteArticle(): void {
+    
+        $adminId = $_SESSION['user_id'] ?? null;
+        if (!$adminId) {
+            header('Location: ' . BASE_URL . '/public/index.php?page=login');
+            exit;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['article_id'])) {
+            $articleId = (int)$_POST['article_id'];
+
+            
+            if (supprimerArticle($this->pdo, $articleId, $adminId, true)) {
+                $_SESSION['message'] = "Article supprimé (admin).";
+            } else {
+                $_SESSION['message'] = "Erreur : suppression échouée.";
+            }
+            header('Location: ' . BASE_URL . '/public/index.php?page=admin/accueil');
+            exit;
+        }
+
+        http_response_code(400);
+        echo "Requête invalide.";
+    }
+
+    private function createArticle(): void {
+
+        $adminId = $_SESSION['user_id'] ?? null;
+        if (!$adminId) {
+            header('Location: ' . BASE_URL . '/public/index.php?page=login');
+            exit;
+        }
+
+        $error = '';
+        $categories = getCategories($this->pdo);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $titre = $_POST['titre'] ?? '';
+            $description = $_POST['description'] ?? '';
+            $categorieId = !empty($_POST['categorie_id']) ? (int)$_POST['categorie_id'] : null;
+
+            if (!$titre || !$description) {
+                $error = "Veuillez remplir tous les champs.";
+            } elseif (creerArticle($this->pdo, $adminId, $titre, $description, $categorieId)) {
+                $_SESSION['message'] = "Article créé (admin).";
+                header('Location: ' . BASE_URL . '/public/index.php?page=admin/accueil');
+                exit;
+            } else {
+                $error = "Erreur lors de la création de l'article.";
+            }
+        }
+
+        $articleData = ['titre' => '', 'description' => '', 'categorie_id' => ''];
+        $isEdit = false;
+        $actionUrl = BASE_URL . '/public/index.php?page=admin/creation';
+        require __DIR__ . '/../Views/user/create_article.php'; // réutilisation de la même vue
+    }
+
+
+
 
     /** Action POST: création de catégorie */
     private function createCategoryAction(): void {
@@ -77,4 +144,7 @@ class AdminController
         header('Location: ' . $_SERVER['PHP_SELF'] . '?page=admin/accueil');
         exit;
     }
+}
+
+
 }
