@@ -8,24 +8,31 @@ $articles = [];
 $query = $_POST['query'] ?? '';
 $category = $_POST['category'] ?? '';
 
-switch (true) {
-    case !empty($query):
-        $id_user = getUserIdByUsername($pdo, $query);
-        $articles = $id_user !== null
-            ? getArticlesByUserLimit($pdo, $id_user, $limit, $offset)
-            : [];   
-        break;
+if (!empty($query)) {
 
-    case !empty($category):
-        $articles = getArticlesByCategorieLimit($pdo, (int)$category, $limit, $offset);
-        break;
+    $id_user = getUserIdByUsername($pdo, $query);
+    if ($id_user !== null) {
+        $articles = getArticlesByUserLimit($pdo, $id_user, $limit, $offset);
+        $totalArticles = countArticlesByUser($pdo, $id_user);
 
-    default:
-        $articles = getArticlesLimit($pdo, $limit, $offset);
-        break;
+    } else {
+        $articles = []; 
+    }
+
+} elseif (!empty($category)) {
+
+    $categoryId = (int)$category;
+    $articles = getArticlesByCategorieLimit($pdo, $categoryId, $limit, $offset);
+    $totalArticles = countArticlesByCategorie($pdo, $categoryId);
+
+
+} else {
+
+    $articles = getArticlesLimit($pdo, $limit, $offset);
+    $totalArticles = getArticlesCount($pdo);
+
 }
 
-$totalArticles = getArticlesCount($pdo);
 $totalPages = (int)ceil($totalArticles / $limit);
 
 foreach ($articles as &$article) {

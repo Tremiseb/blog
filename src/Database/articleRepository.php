@@ -71,6 +71,20 @@ function getArticlesByCategorieLimit(PDO $pdo, int $categorieId, int $limit = 5,
 }
 
 
+function countArticlesByUser(PDO $pdo, int $userId): int {
+    $stmt = $pdo->prepare("SELECT COUNT(*) AS total FROM article WHERE user_id = :user_id");
+    $stmt->execute(['user_id' => $userId]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return (int)$result['total'];
+}
+
+function countArticlesByCategorie(PDO $pdo, int $categorieId): int {
+    $stmt = $pdo->prepare("SELECT COUNT(*) AS total FROM article WHERE categorie_id = :categorie_id");
+    $stmt->execute(['categorie_id' => $categorieId]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return (int)$result['total'];
+}
+
 
 function getArticlesFiltered(PDO $pdo, ?int $category = null, ?string $query = null, int $limit = 5, int $offset = 0): array {
     $sql = "SELECT a.*, c.nom AS categorie, u.username 
