@@ -1,5 +1,9 @@
 /*liste des articles*/
 
+
+    
+
+
 .articles {
     max-width: 900px;
     margin: 40px auto;
@@ -7,6 +11,7 @@
     flex-direction: column;
     gap: 25px;
     padding: 0 15px;
+    min-height:90vh;
 }
 
 
