@@ -86,38 +86,18 @@ function countArticlesByCategorie(PDO $pdo, int $categorieId): int {
 }
 
 
-function getArticlesFiltered(PDO $pdo, ?int $category = null, ?string $query = null, int $limit = 5, int $offset = 0): array {
-    $sql = "SELECT a.*, c.nom AS categorie, u.username 
-            FROM article a
-            LEFT JOIN categorie c ON a.categorie_id = c.id
-            LEFT JOIN user u ON a.user_id = u.id
-            WHERE 1=1";
-
-    $params = [];
-
-    if ($category) {
-        $sql .= " AND a.categorie_id = :category";
-        $params[':category'] = $category;
-    }
-
-    if ($query) {
-        $sql .= " AND a.titre LIKE :query";
-        $params[':query'] = '%' . $query . '%';
-    }
-
-    $sql .= " ORDER BY a.created_at DESC
-              LIMIT :limit OFFSET :offset";
-
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-
-    foreach ($params as $key => $value) {
-        $stmt->bindValue($key, $value);
-    }
-
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+function getArticleById(PDO $pdo, int $id): ?array {
+    $stmt = $pdo->prepare("
+        SELECT a.id, a.titre, a.description, u.username, c.nom AS categorie
+        FROM article a
+        LEFT JOIN users u ON a.user_id = u.id
+        LEFT JOIN categorie c ON a.categorie_id = c.id
+        WHERE a.id = :id
+        LIMIT 1
+    ");
+    $stmt->execute(['id' => $id]);
+    $article = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $article ?: null;
 }
 
 
@@ -164,5 +144,3 @@ function supprimerArticle(PDO $pdo, int $articleId, int $userId): bool {
         'user_id' => $userId
     ]);
 }
-
-

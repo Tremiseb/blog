@@ -40,7 +40,6 @@ $categories = getCategories($pdo);
         </select>
         <button type="submit" name="action" value="filter">Filter</button>
 
-        <!-- Retirer filtre si actif -->
         <?php if(!empty($category)): ?>
             <button type="submit" name="action" value="reset">Retirer filtre</button>
         <?php endif; ?>
