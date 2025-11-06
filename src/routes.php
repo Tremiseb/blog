@@ -33,6 +33,10 @@ switch ($page) {
         require_once __DIR__ . '/Views/user/accueil.php';
         break;
 
+    case 'admin/accueil':
+        require_once __DIR__ . '/Views/admin/accueil.php';
+        break;
+
     case 'user/create':
         require_once __DIR__ . '/Views/shared/create_article.php';
         break;

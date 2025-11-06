@@ -1,12 +1,20 @@
 <?php
 
-$limit = 5; 
+$limit = 5;
 $page = isset($_GET['page_num']) ? max(1, (int)$_GET['page_num']) : 1;
 $offset = ($page - 1) * $limit;
 
-$articles = getArticlesLimit($pdo, $limit, $offset);
-$totalArticles = getArticlesCount($pdo);
-$totalPages = (int)ceil($totalArticles / $limit);
+if ($category) {
+
+    $articles = getArticlesByCategory($pdo, $category, $limit, $offset);
+    $totalArticles = getArticlesCountByCategory($pdo, $category);
+} else {
+    $articles = getArticlesLimit($pdo, $limit, $offset);
+    $totalArticles = getArticlesCount($pdo);
+}
+
+$totalPages = max(1, ceil($totalArticles / $limit));
+
 
 foreach ($articles as &$article) {
     $article['commentaires'] = getCommentairesByArticleLimit($pdo, $article['id'], 2);
@@ -74,17 +82,20 @@ unset($article); // libère la référence
 
 <div class="pagination">
     <?php if ($page > 1): ?>
-        <a href="?page=user/accueil&page_num=<?= $page - 1 ?>">Précédent</a>
+        <a href="?page=user/accueil&page_num=<?= $page - 1 ?><?= $category ? '&category=' . $category : '' ?>">Précédent</a>
     <?php endif; ?>
 
     <?php for ($i = 1; $i <= $totalPages; $i++): ?>
-        <a href="?page=user/accueil&page_num=<?= $i ?>" <?= $i === $page ? 'class="active"' : '' ?>><?= $i ?></a>
+        <a href="?page=user/accueil&page_num=<?= $i ?><?= $category ? '&category=' . $category : '' ?>"
+           <?= $i == $page ? 'class="active"' : '' ?>>
+            <?= $i ?>
+        </a>
     <?php endfor; ?>
 
     <?php if ($page < $totalPages): ?>
-        <a href="?page=user/accueil&page_num=<?= $page + 1 ?>">Suivant</a>
+        <a href="?page=user/accueil&page_num=<?= $page + 1 ?><?= $category ? '&category=' . $category : '' ?>">Suivant</a>
     <?php endif; ?>
-</div>
+</div>  
 
 </body>
 </html>

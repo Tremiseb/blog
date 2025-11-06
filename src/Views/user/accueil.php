@@ -5,7 +5,13 @@ require_once __DIR__ . '/../../Database/articleRepository.php';
 require_once __DIR__ . '/../../Database/categorieRepository.php';
 
 require_once __DIR__ . '/../../Database/commentaireRepository.php';
-$query = $_GET['query'] ?? null;
+
+
+if (isset($_GET['category'])) {
+    $_SESSION['category_filter'] = $_GET['category'];
+}
+
+$category = $_GET['category'] ?? $_SESSION['category_filter'] ?? null;
 
 $pageTitle = "Orange Cat Only";
 ?>
