@@ -1,5 +1,5 @@
 header {
-  background-color: #fff;
+  background-color: #ffffff;
 }
 
 #logo_header {
@@ -46,5 +46,31 @@ nav a:hover {
 
 
 
+.header-container input[type="text"],
+.header-container select {
+    padding: 10px 15px;
+    border: 2px solid var(--vert-fonce);
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+
+.header-container button {
+    background-color: var(--vert-fonce);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: larger;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+.header-container button:hover {
+    background-color: #fd8700;
+}
 
 

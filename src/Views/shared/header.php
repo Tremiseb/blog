@@ -8,8 +8,8 @@ $categories = getCategories($pdo);
     <div class='header-container'>
         <img id="logo_header" src="<?= BASE_URL ?>/public/assets/img/logo.png" alt="oco-logo">
 
-        <form action="?page=user/accueil" method="get">
-            <input type="text" name="query" placeholder="Rechercher..." />
+        <form action="" method="POST">
+            <input type="text" name="query" placeholder="Rechercher par le pseudo" />
             <button type="submit">Rechercher</button>
         </form>
 
