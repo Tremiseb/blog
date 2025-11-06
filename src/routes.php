@@ -10,6 +10,7 @@ require_once __DIR__ . '/Controllers/AdminController.php';
 
 require_once __DIR__ . '/Controllers/UserController.php';
 require_once __DIR__ . '/Controllers/ArticleController.php';
+require_once __DIR__ . '/Controllers/CommentaireController.php';
 
 
 $page = $_GET['page'] ?? 'home';
@@ -80,6 +81,33 @@ switch ($page) {
         break;
     
 
+    case 'article/supprimer':
+        $userController = new UserController();
+        $userController->handleRequest('supprimer');
+        break;
+        
+
+    case 'user/commentaire_form':
+        if (empty($_SESSION['email']) || $_SESSION['role'] !== 'user') {
+            http_response_code(403);
+            echo "Faut être connecté en user";
+            exit;
+        }
+
+        $commentaireController = new CommentaireController();
+        $commentaireController->handleRequest('createForm');
+        break;
+
+    case 'commentaire/store':
+        if (empty($_SESSION['email']) || $_SESSION['role'] !== 'user') {
+            http_response_code(403);
+            echo "Faut être connecté en user";
+            exit;
+        }
+
+        $commentaireController = new CommentaireController();
+        $commentaireController->handleRequest('store');
+        break;
     //A RAJOUTER DANS LES AUTRES VERSIONS
     case 'admin/categories/create':
         if (empty($_SESSION['email']) || $_SESSION['role'] !== 'admin') { http_response_code(403); echo "Faut être connecté en admin"; exit; }
