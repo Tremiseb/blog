@@ -30,7 +30,6 @@ if ($article) {
 
     <small>Catégorie : <?= htmlspecialchars($article['categorie'] ?? 'Aucune') ?></small>
 
-    <!-- Commentaires existants -->
     <?php if (!empty($commentaires)): ?>
         <div class="commentaires">
             <h3>Commentaires</h3>
@@ -39,7 +38,6 @@ if ($article) {
                     <p><strong>@<?= htmlspecialchars($com['username']) ?></strong></p>
                     <p><?= nl2br(htmlspecialchars($com['description'])) ?></p>
 
-                    <!-- Bouton supprimer si le commentaire appartient à l'utilisateur -->
                     <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $com['user_id']): ?>
                         <form action="?page=user/commentaire&action=delete" method="post">
                             <input type="hidden" name="commentaire_id" value="<?= (int)$com['id'] ?>">
