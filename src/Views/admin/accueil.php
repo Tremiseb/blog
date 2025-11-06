@@ -5,13 +5,7 @@ require_once __DIR__ . '/../../Database/articleRepository.php';
 require_once __DIR__ . '/../../Database/categorieRepository.php';
 
 require_once __DIR__ . '/../../Database/commentaireRepository.php';
-
-
-if (isset($_GET['category'])) {
-    $_SESSION['category_filter'] = $_GET['category'];
-}
-
-$category = $_GET['category'] ?? $_SESSION['category_filter'] ?? null;
+$query = $_GET['query'] ?? null;
 
 $pageTitle = "Orange Cat Only";
 ?>
@@ -41,9 +35,42 @@ $pageTitle = "Orange Cat Only";
 
         $bouton = $bouton ?? "Déconnexion";
         $redirection = $redirection ?? BASE_URL . "/public/index.php?page=logout";
+    ?>   
 
+    
+    
+    <?php
         require_once __DIR__ . '/../shared/header.php';
+    ?>
+    
+        <section class="admin-panel">
+            <h1>Gestion des catégories</h1>
 
+            <form class="admin-add-cat" method="POST"
+                action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>?page=admin/create">
+                <input type="text" name="nom" placeholder="Nouvelle catégorie" required>
+                <button type="submit" class="ajouter">Ajouter</button>
+            </form>
+
+            <?php if (!empty($categories)): ?>
+                <ul class="admin-cat-list">
+                    <?php foreach ($categories as $cat): ?>
+                        <li>
+                            <span><?= htmlspecialchars($cat['nom']) ?></span>
+                            <form method="POST"
+                                action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>?page=admin/delete"
+                                onsubmit="return confirm('Supprimer la catégorie « <?= htmlspecialchars($cat['nom']) ?> » et ses articles ?');">
+                                <input type="hidden" name="id" value="<?= (int)$cat['id'] ?>">
+                                <button type="submit" class="supprimer">Supprimer</button>
+                            </form>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php else: ?>
+                <p>Aucune catégorie pour le moment.</p>
+            <?php endif; ?>
+        </section>
+    <?php
         require_once __DIR__ . '/../shared/affichage_article.php';
 
         require_once __DIR__ . '/../shared/footer.php';
