@@ -16,7 +16,7 @@ if ($article) {
     <meta charset="utf-8">
     <title>Ajouter un commentaire - Orange Cat Only</title>
     <link href="<?= BASE_URL ?>/public/assets/shared/charte-graphique.css" rel="stylesheet">
-    <link href="<?= BASE_URL ?>/public/assets/shared/login/style.css" rel="stylesheet">
+    <link href="<?= BASE_URL ?>/public/assets/shared/commentaire/style.css" rel="stylesheet">
 </head>
 <body class="page-login">
 

@@ -1,0 +1,160 @@
+/* Conteneur global */
+.article-preview {
+    max-width: 900px;
+    margin: 40px auto;
+    background: #fdf3e6;
+    border: 1px solid #f5c27a;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Auteur de l'article */
+.article-author {
+    font-weight: bold;
+    color: #e67e22;
+    margin-bottom: 8px;
+}
+
+/* Titre */
+.article-preview h2 {
+    font-size: 1.6rem;
+    color: #d35400;
+    margin-bottom: 10px;
+}
+
+/* Description */
+.article-preview p {
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 12px;
+}
+
+/* Catégorie */
+.article-preview small {
+    display: block;
+    margin-top: 8px;
+    color: #7f8c8d;
+    font-style: italic;
+}
+
+/* Boutons actions article */
+.article-actions {
+    margin-top: 15px;
+}
+
+.article-actions button {
+    background-color: #fdb530;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 15px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.article-actions button:hover {
+    background-color: #e64a01;
+}
+
+/* Section des commentaires */
+.commentaires {
+    background: #fff8f0;
+    border: 1px solid #f5c27a;
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin-top: 20px;
+}
+
+.commentaires h3 {
+    color: #d35400;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+/* Chaque commentaire */
+.commentaire {
+    border-bottom: 1px solid #f5c27a;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.commentaire:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.commentaire p {
+    margin-bottom: 5px;
+    color: #34495e;
+    line-height: 1.5;
+}
+
+.commentaire form button {
+    background-color: #e74c3c;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: white;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.commentaire form button:hover {
+    background-color: #c0392b;
+}
+
+/* Formulaire ajouter commentaire */
+.form-container {
+    max-width: 900px;
+    margin: 30px auto;
+    background: #fffdf5;
+    border: 1px solid #f5c27a;
+    border-radius: 10px;
+    padding: 20px 25px;
+}
+
+.form-container h1 {
+    font-size: 1.5rem;
+    color: #d35400;
+    margin-bottom: 15px;
+}
+
+.form-container .input,
+.form-container textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+.form-container button {
+    background-color: #fdb530;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.form-container button:hover {
+    background-color: #e64a01;
+}
+
+/* Message d'erreur */
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    border: 1px solid #f5c6cb;
+}
