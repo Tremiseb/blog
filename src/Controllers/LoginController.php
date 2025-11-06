@@ -1,44 +1,33 @@
 <?php
-
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../config.php';          
 require_once __DIR__ . '/../Database/db.php';
 require_once __DIR__ . '/../Database/userRepository.php';
 
-class LoginController {
+$pdo = getPDO(DB_HOST, DB_NAME, DB_USER, DB_PASS);
 
-    private PDO $pdo;
+$erreur = '';
 
-    public function __construct() {
-        $this->pdo = getPDO(DB_HOST, DB_NAME, DB_USER, DB_PASS);
-    }
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    public function handleRequest(): void {
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-        $erreur = '';
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            
-            $email = $_POST['email'] ?? '';
-            $password = $_POST['password'] ?? '';
+    $user = login($pdo, $email, $password);
 
-            $user = login($this->pdo, $email, $password);
+    if ($user) {
 
-            if ($user) {
-                $_SESSION['email'] = $user['email'];
-                $_SESSION['role'] = $user['role'];
-                $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['email']   = $user['email'];
+        $_SESSION['role']    = $user['role'];
 
 
-                if ($user['role'] === 'admin') {
-                    header('Location: ' . BASE_URL . '/public/index.php?page=admin/accueil');
-                } else {
-                    header('Location: ' . BASE_URL . '/public/index.php?page=user/accueil');
-                }
-                exit;
-            } else {
-                $erreur = 'Identifiant ou mot de passe incorrect';
-            }
+        if ($user['role'] === 'admin') {
+            header('Location: ' . BASE_URL . '/public/index.php?page=admin/accueil');
+        } else {
+            header('Location: ' . BASE_URL . '/public/index.php?page=user/accueil');
         }
-
-        require __DIR__ . '/../Views/shared/login.php';
+        exit;
+    } else {
+        $erreur = "L'email ou le mot de passe n'est pas valide";
     }
 }

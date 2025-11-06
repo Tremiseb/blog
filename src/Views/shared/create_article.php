@@ -2,6 +2,8 @@
 require_once __DIR__ . '/../../../src/config.php';
 require_once __DIR__ . '/../../../src/Database/db.php';
 require_once __DIR__ . '/../../../src/Database/articleRepository.php'; 
+require_once __DIR__ . '/../../../src/Controllers/ArticleController.php'; 
+
 
 $pdo = getPDO(DB_HOST, DB_NAME, DB_USER, DB_PASS);
 $categories = getCategories($pdo); 
@@ -20,12 +22,12 @@ $categories = getCategories($pdo);
         <h1>Créer un article</h1>
 
         <?php if (!empty($error)): ?>
-            <div class="alert-error" style="color:red; margin-bottom:10px;">
+            <div class="alert-error" >
                 <?= htmlspecialchars($error) ?>
             </div>
         <?php endif; ?>
 
-        <form method="POST" action="">
+        <form method="POST" action="?page=user/article&action=create">
             <input class="input" type="text" name="titre" placeholder="Titre de l'article" required>
             <textarea class="input" name="description" placeholder="Description de l'article" rows="5" required></textarea>
 

@@ -16,6 +16,42 @@ function getArticlesLimit(PDO $pdo, int $limit = 5, int $offset = 0): array {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getArticlesFiltered(PDO $pdo, ?int $category = null, ?string $query = null, int $limit = 5, int $offset = 0): array {
+    $sql = "SELECT a.*, c.nom AS categorie, u.username 
+            FROM article a
+            LEFT JOIN categorie c ON a.categorie_id = c.id
+            LEFT JOIN user u ON a.user_id = u.id
+            WHERE 1=1";
+
+    $params = [];
+
+    if ($category) {
+        $sql .= " AND a.categorie_id = :category";
+        $params[':category'] = $category;
+    }
+
+    if ($query) {
+        $sql .= " AND a.titre LIKE :query";
+        $params[':query'] = '%' . $query . '%';
+    }
+
+    $sql .= " ORDER BY a.created_at DESC
+              LIMIT :limit OFFSET :offset";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+
+    foreach ($params as $key => $value) {
+        $stmt->bindValue($key, $value);
+    }
+
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
+
 function getArticlesCount(PDO $pdo): int {
     $stmt = $pdo->query("SELECT COUNT(*) FROM article");
     return (int)$stmt->fetchColumn();

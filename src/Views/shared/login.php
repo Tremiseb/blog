@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . '/../../config.php'; ?>
+<?php require_once __DIR__ . '/../../Controllers/LoginController.php'; ?>
 
 
 <!DOCTYPE html>
@@ -11,16 +11,24 @@
 </head>
 <body class="page-login">
     <div class="form-container">
-        <img id="logo_login" src="<?= BASE_URL ?>/public/assets/img/logo.png" alt="Logo Team Jardin">
+        <img id="logo_login" src="<?= BASE_URL ?>/public/assets/img/logo.png" alt="Logo-Orange-Cat-Only">
         <form method="POST" action="<?= BASE_URL ?>/public/index.php?page=login">
+
             <input class="input" type="text" name="email" placeholder="email@univ-lyon1.fr" required>
             <input class="input" type="password" name="password" placeholder="Mot de passe" required>
+            
+            <?php if (!empty($erreur)) : ?>
+                <p><?= htmlspecialchars($erreur) ?></p>
+            <?php endif; ?>
+
             <button class="btn_connexion" type="submit">Connexion</button>
 
             <a href="<?= BASE_URL ?>/public/index.php?page=register">Nouveau ? Créer un compte !</a>
+
 
         </form>
     </div>
 
 </body>
 </html>
+

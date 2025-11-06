@@ -1,19 +1,8 @@
 <?php
 require_once __DIR__ . '/../src/config.php';
-require_once __DIR__ . '/Controllers/HomeController.php';
-require_once __DIR__ . '/Controllers/LoginController.php';
-require_once __DIR__ . '/Controllers/RegisterController.php';
-require_once __DIR__ . '/Controllers/LogoutController.php';
-
-require_once __DIR__ . '/Controllers/AdminController.php';
 
 
-require_once __DIR__ . '/Controllers/UserController.php';
-require_once __DIR__ . '/Controllers/ArticleController.php';
-require_once __DIR__ . '/Controllers/CommentaireController.php';
-
-
-$page = $_GET['page'] ?? 'home';
+$page = $_GET['page'] ?? 'login';
 
 $pagesPubliques = ['login', 'register', 'logout', 'home'];
 
@@ -25,100 +14,51 @@ if (!in_array($page, $pagesPubliques) && empty($_SESSION['email'])) {
 
 
 switch ($page) {
-    case 'login':
-        $loginController = new LoginController();
-        $loginController->handleRequest();
-        break;
-
-    case 'register':
-        $registerController = new RegisterController();
-        $registerController->handleRequest();
-        break;
-
     case 'home':
-        ShowHomeController();
+        require_once __DIR__ . '/Views/shared/login.php';
+        break;
+
+
+    case 'login':
+        require_once __DIR__ . '/Views/shared/login.php';
         break;
 
     case 'logout':
-        $logoutController = new LogoutController();
-        $logoutController->handleRequest();
+        require_once __DIR__ . '/Controllers/LogoutController.php';
         break;
 
-    case 'admin/accueil':
 
-        if (empty($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
-            http_response_code(403);
-            echo "Faut être connecté en admin";
-            exit;
-        }
-
-        $adminController = new AdminController();
-        $adminController->handleRequest();
+    case 'register':
+        require_once __DIR__ . '/Views/shared/register.php';
         break;
 
     case 'user/accueil':
-
-        if (empty($_SESSION['email']) || $_SESSION['role'] !== 'user') {
-            http_response_code(403);
-            echo "Faut être connecté en user";
-            exit;
-        }
-
-        $userController = new UserController();
-        $userController->handleRequest();
-        break;
-
-    case 'user/creation-article':
-
-        if (empty($_SESSION['email']) || $_SESSION['role'] !== 'user') {
-            http_response_code(403);
-            echo "Faut être connecté en user";
-            exit;
-        }
-
-        $ArticleController = new ArticleController();
-        $ArticleController->handleRequest();
-        break;
-    
-
-    case 'article/supprimer':
-        $userController = new UserController();
-        $userController->handleRequest('supprimer');
+        require_once __DIR__ . '/Views/user/accueil.php';
         break;
         
+    case 'admin/accueil':
+        require_once __DIR__ . '/Views/admin/accueil.php';
+        break;
+
+    case 'user/create':
+        require_once __DIR__ . '/Views/shared/create_article.php';
+        break;
 
     case 'user/commentaire_form':
-        if (empty($_SESSION['email']) || $_SESSION['role'] !== 'user') {
-            http_response_code(403);
-            echo "Faut être connecté en user";
-            exit;
-        }
-
-        $commentaireController = new CommentaireController();
-        $commentaireController->handleRequest('createForm');
+        require_once __DIR__ . '/Views/user/commentaire_form.php';
         break;
 
-    case 'commentaire/store':
-        if (empty($_SESSION['email']) || $_SESSION['role'] !== 'user') {
-            http_response_code(403);
-            echo "Faut être connecté en user";
-            exit;
-        }
-
-        $commentaireController = new CommentaireController();
-        $commentaireController->handleRequest('store');
-        break;
-    //A RAJOUTER DANS LES AUTRES VERSIONS
-    case 'admin/categories/create':
-        if (empty($_SESSION['email']) || $_SESSION['role'] !== 'admin') { http_response_code(403); echo "Faut être connecté en admin"; exit; }
-        (new AdminController())->handleRequest('categories/create');
+    case 'user/commentaire':
+        require_once __DIR__ . '/Controllers/CommentaireController.php';
         break;
 
-    case 'admin/categories/delete':
-        if (empty($_SESSION['email']) || $_SESSION['role'] !== 'admin') { http_response_code(403); echo "Faut être connecté en admin"; exit; }
-        (new AdminController())->handleRequest('categories/delete');
+    case 'user/article':
+        require_once __DIR__ . '/Controllers/ArticleController.php';
         break;
-    //
+    
+    case 'admin/categorie':
+        require_once __DIR__ . '/Controllers/CategorieController.php';
+        break;
 
     default:
         http_response_code(404);
