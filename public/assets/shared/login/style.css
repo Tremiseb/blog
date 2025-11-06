@@ -1,5 +1,5 @@
 body.page-login{
-    background-color: var(--vert-fonce);
+    background: linear-gradient(to bottom, #FFA253, #FBDBBF);
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
