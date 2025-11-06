@@ -2,6 +2,8 @@
 require_once __DIR__ . '/../../config.php'; 
 require_once __DIR__ . '/../../Database/db.php';
 require_once __DIR__ . '/../../Database/articleRepository.php';
+require_once __DIR__ . '/../../Database/categorieRepository.php';
+
 require_once __DIR__ . '/../../Database/commentaireRepository.php';
 
 $pageTitle = "Orange Cat Only";
@@ -34,8 +36,14 @@ $pageTitle = "Orange Cat Only";
     $bouton = $bouton ?? "Déconnexion";
     $redirection = $redirection ?? BASE_URL . "/public/index.php?page=login";
 
-    
+
 
 
     require_once __DIR__ . '/../shared/header.php';
+
+    require_once __DIR__ . '/affichage_article.php';
+
+
+    require_once __DIR__ . '/../shared/footer.php';
+
 ?>

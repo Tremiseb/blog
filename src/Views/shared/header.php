@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../../Controllers/HeaderController.php';
-require_once __DIR__ . '/../../Database/categorieRepository.php';
 
 $categories = cat_getAll($pdo); 
 ?>

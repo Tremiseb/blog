@@ -17,3 +17,27 @@ if ($query) {
 if ($category) {
     $posts = array_filter($posts, fn($p) => $p['category'] === $category);
 }
+
+// Si on clique sur le bouton creer article 
+
+$error = '';
+$categories = getCategories($pdo);
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $titre = $_POST['titre'] ?? '';
+    $description = $_POST['description'] ?? '';
+    $categorie_id = $_POST['categorie_id'] ?? null;
+    $user_id = $_SESSION['user_id'] ?? null;
+
+    if (!$titre || !$description || !$user_id) {
+        $error = "Veuillez remplir tous les champs.";
+    } else {
+        $created = createArticle($pdo, $titre, $description, $user_id, $categorie_id);
+        if ($created) {
+            header('Location: ' . BASE_URL . '/public/index.php?page=user/accueil');
+            exit;
+        } else {
+            $error = "Impossible de créer l'article.";
+        }
+    }
+}
