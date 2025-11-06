@@ -34,7 +34,7 @@ $pageTitle = "Orange Cat Only";
     $creerArticle = $creerArticle ?? BASE_URL . "/public/index.php?page=user/creation-article";
 
     $bouton = $bouton ?? "Déconnexion";
-    $redirection = $redirection ?? BASE_URL . "/public/index.php?page=login";
+    $redirection = $redirection ?? BASE_URL . "/public/index.php?page=logout";
 
 
 

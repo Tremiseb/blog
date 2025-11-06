@@ -14,9 +14,19 @@ if (!in_array($page, $pagesPubliques) && empty($_SESSION['email'])) {
 
 
 switch ($page) {
+    case 'home':
+        require_once __DIR__ . '/Views/shared/login.php';
+        break;
+
+
     case 'login':
         require_once __DIR__ . '/Views/shared/login.php';
         break;
+
+    case 'logout':
+        require_once __DIR__ . '/Controllers/LogoutController.php';
+        break;
+
 
     case 'register':
         require_once __DIR__ . '/Views/shared/register.php';
