@@ -44,6 +44,33 @@ function getArticlesByUserLimit(PDO $pdo, int $userId, int $limit = 5, int $offs
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getArticlesByCategorieLimit(PDO $pdo, int $categorieId, int $limit = 5, int $offset = 0): array {
+    $stmt = $pdo->prepare("
+        SELECT 
+            a.id,
+            a.titre,
+            a.description,
+            a.user_id,
+            u.username,
+            a.categorie_id,
+            c.nom AS categorie
+        FROM article a
+        LEFT JOIN users u ON a.user_id = u.id
+        LEFT JOIN categorie c ON a.categorie_id = c.id
+        WHERE a.categorie_id = :categorie_id
+        ORDER BY a.id DESC
+        LIMIT :limit OFFSET :offset
+    ");
+
+    $stmt->bindValue(':categorie_id', $categorieId, PDO::PARAM_INT);
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+
 
 function getArticlesFiltered(PDO $pdo, ?int $category = null, ?string $query = null, int $limit = 5, int $offset = 0): array {
     $sql = "SELECT a.*, c.nom AS categorie, u.username 

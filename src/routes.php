@@ -45,7 +45,7 @@ switch ($page) {
         break;
 
     case 'user/commentaire_form':
-        require_once __DIR__ . '/Views/user/commentaire_form.php';
+        require_once __DIR__ . '/Views/shared/commentaire_form.php';
         break;
 
     case 'user/commentaire':

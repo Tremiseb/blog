@@ -12,9 +12,7 @@
 
 <body>
 
-    <?php
-        require_once __DIR__ . '/shared/login.php';
-    ?>
+    <?php require_once __DIR__ . '/shared/login.php';?>
     
 </body>
 </html>
