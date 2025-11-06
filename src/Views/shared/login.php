@@ -11,7 +11,7 @@
 </head>
 <body class="page-login">
     <div class="form-container">
-        <img id="logo_login" src="<?= BASE_URL ?>/public/assets/img/logo.png" alt="Logo Team Jardin">
+        <img id="logo_login" src="<?= BASE_URL ?>/public/assets/img/logo.png" alt="Logo-Orange-Cat-Only">
         <form method="POST" action="<?= BASE_URL ?>/public/index.php?page=login">
 
             <input class="input" type="text" name="email" placeholder="email@univ-lyon1.fr" required>

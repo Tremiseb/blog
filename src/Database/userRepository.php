@@ -15,8 +15,6 @@ function emailExists(PDO $pdo, string $email): bool {
     return $stmt->fetchColumn() > 0;
 }
 
-
-//Faut verifier que l'email et le pseudo ne soient pas déjà utilisés
 function CreerUtilisateur(PDO $pdo, string $email, string $password, string $username, string $role): bool {
     $stmt = $pdo->prepare("INSERT INTO users (email, password, username, role) VALUES (:email, :password, :username, :role)");
     return $stmt->execute([
