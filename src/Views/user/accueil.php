@@ -34,5 +34,8 @@ $pageTitle = "Orange Cat Only";
     $bouton = $bouton ?? "Déconnexion";
     $redirection = $redirection ?? BASE_URL . "/public/index.php?page=login";
 
+    
+
+
     require_once __DIR__ . '/../shared/header.php';
 ?>

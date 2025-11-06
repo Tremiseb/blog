@@ -1,20 +1,27 @@
+<?php
+require_once __DIR__ . '/../../Controllers/HeaderController.php';
+require_once __DIR__ . '/../../Database/categorieRepository.php';
+
+$categories = cat_getAll($pdo); 
+?>
+
 <header>
     <div class='header-container'>
         <img id="logo_header" src="<?= BASE_URL ?>/public/assets/img/logo.png" alt="oco-logo">
-
 
         <form action="/search" method="get">
             <input type="text" name="query" placeholder="Rechercher..." />
             <button type="submit">Rechercher</button>
         </form>
 
-
         <form action="/search" method="get">
             <select name="category">
                 <option value="" selected hidden>Toutes les catégories</option>
-                <option value="books">Livres</option>
-                <option value="movies">Films</option>
-                <option value="music">Musique</option>
+                <?php foreach ($categories as $cat) : ?>
+                    <option value="<?= htmlspecialchars($cat['id']) ?>">
+                        <?= htmlspecialchars($cat['nom']) ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
             <button type="submit">Filtrer</button>
         </form>
