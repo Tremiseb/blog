@@ -1,6 +1,12 @@
 <?php
 require_once __DIR__ . '/../../../src/config.php';
 require_once __DIR__ . '/../../Controllers/CommentaireController.php';
+require_once __DIR__ . '/../../Database/commentaireRepository.php';
+
+$commentaires = [];
+if ($article) {
+    $commentaires = getCommentairesByArticle($pdo, $article['id']);
+}
 
 ?>
 
@@ -14,7 +20,43 @@ require_once __DIR__ . '/../../Controllers/CommentaireController.php';
 </head>
 <body class="page-login">
 
+<div class="article-preview">
+
+    <p class="article-author"><?= htmlspecialchars("@ " . $article['username']) ?></p>
+
+    <h2><?= htmlspecialchars($article['titre']) ?></h2>
+
+    <p><?= nl2br(htmlspecialchars($article['description'])) ?></p>
+
+    <small>Catégorie : <?= htmlspecialchars($article['categorie'] ?? 'Aucune') ?></small>
+
+    <!-- Commentaires existants -->
+    <?php if (!empty($commentaires)): ?>
+        <div class="commentaires">
+            <h3>Commentaires</h3>
+            <?php foreach ($commentaires as $com): ?>
+                <div class="commentaire">
+                    <p><strong>@<?= htmlspecialchars($com['username']) ?></strong></p>
+                    <p><?= nl2br(htmlspecialchars($com['description'])) ?></p>
+
+                    <!-- Bouton supprimer si le commentaire appartient à l'utilisateur -->
+                    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] == $com['user_id']): ?>
+                        <form action="?page=user/commentaire&action=delete" method="post">
+                            <input type="hidden" name="commentaire_id" value="<?= (int)$com['id'] ?>">
+                            <button type="submit">Supprimer</button>
+                        </form>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
+</div>
+
+
 <div class="form-container">
+
+
     <h1>Ajouter un commentaire</h1>
 
     <?php if (!empty($error)): ?>
