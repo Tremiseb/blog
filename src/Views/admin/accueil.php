@@ -24,6 +24,7 @@ $pageTitle = "Orange Cat Only";
 
     <link href="<?= BASE_URL ?>/public/assets/shared/footer/style.css" rel="stylesheet">
     <link href="<?= BASE_URL ?>/public/assets/shared/footer/position.css" rel="stylesheet">
+    <link href="<?= BASE_URL ?>/public/assets/admin/style.css" rel="stylesheet">
 
 </head>
 
